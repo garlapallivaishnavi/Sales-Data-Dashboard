@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <span class="brand-mark">S</span>
+        <div>
+          <strong>SalesPulse</strong>
+          <small>Revenue command</small>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a class="active" href="#dashboard" aria-current="page">
+          <span class="nav-icon">D</span>
+          Dashboard
+        </a>
+        <a href="#analytics">
+          <span class="nav-icon">A</span>
+          Analytics
+        </a>
+        <a href="#reports">
+          <span class="nav-icon">R</span>
+          Reports
+        </a>
+      </nav>
+
+      <div class="sidebar-note">
+        <span>Q2 Pipeline</span>
+        <strong>+18.7%</strong>
+        <small>Forecast momentum is trending upward.</small>
+      </div>
+    </aside>
+
+    <main class="dashboard" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Executive overview</p>
+          <h1>Sales Dashboard</h1>
+        </div>
+
+        <div class="top-actions">
+          <label class="search">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Search products...">
+          </label>
+          <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+            <span id="themeIcon">D</span>
+          </button>
+          <button class="export-button" id="exportCsv" type="button">
+            Export CSV
+          </button>
+        </div>
+      </header>
+
+      <section class="filters" aria-label="Sales filters">
+        <label>
+          <span>Start date</span>
+          <input id="startDate" type="date">
+        </label>
+        <label>
+          <span>End date</span>
+          <input id="endDate" type="date">
+        </label>
+        <label>
+          <span>Category</span>
+          <select id="categoryFilter">
+            <option value="all">All categories</option>
+          </select>
+        </label>
+        <button id="resetFilters" type="button">Reset filters</button>
+      </section>
+
+      <section class="metric-grid" aria-label="Key sales metrics">
+        <article class="metric-card sales-card">
+          <span>Total Sales</span>
+          <strong data-metric="sales">0</strong>
+          <small>Units sold</small>
+        </article>
+        <article class="metric-card revenue-card">
+          <span>Total Revenue</span>
+          <strong data-metric="revenue">$0</strong>
+          <small>Gross revenue</small>
+        </article>
+        <article class="metric-card orders-card">
+          <span>Total Orders</span>
+          <strong data-metric="orders">0</strong>
+          <small>Completed orders</small>
+        </article>
+        <article class="metric-card growth-card">
+          <span>Growth</span>
+          <strong data-metric="growth">0%</strong>
+          <small>Vs. previous period</small>
+        </article>
+      </section>
+
+      <section class="charts-grid">
+        <article class="panel wide">
+          <div class="panel-header">
+            <div>
+              <h2>Sales Over Time</h2>
+              <p>Daily unit movement across the selected window.</p>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="salesLineChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Monthly Revenue</h2>
+              <p>Revenue grouped by month.</p>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="revenueBarChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Category Mix</h2>
+              <p>Share of revenue by product category.</p>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="categoryPieChart"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel table-panel" id="reports">
+        <div class="panel-header table-heading">
+          <div>
+            <h2>Product Performance</h2>
+            <p id="tableSummary">Showing all products</p>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Product name</th>
+                <th>Category</th>
+                <th>Sales</th>
+                <th>Revenue</th>
+                <th>Orders</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="salesTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
